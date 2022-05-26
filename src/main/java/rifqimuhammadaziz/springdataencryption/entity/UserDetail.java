@@ -1,6 +1,7 @@
 package rifqimuhammadaziz.springdataencryption.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnTransformer;
 import rifqimuhammadaziz.springdataencryption.converter.StringAttributeConverter;
 
 import javax.persistence.*;
@@ -17,6 +18,10 @@ public class UserDetail {
     @Column(length = 200, nullable = false)
     private String name;
 
+    // can only be used in certain databases
+    @ColumnTransformer(
+            read = "AES_DECRYPT(UNHEX(email), 'my-encryptionKey')", // decrypt from mysql
+            write = "HEX(AES_ENCRYPT(?, 'my-encryptionKey'))") // encrypt to mysql
     @Column(length = 100, unique = true, nullable = false)
     private String email;
 
