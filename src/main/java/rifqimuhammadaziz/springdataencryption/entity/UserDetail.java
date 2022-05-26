@@ -21,7 +21,7 @@ public class UserDetail {
     private String email;
 
     @Convert(converter = StringAttributeConverter.class)
-    @Column(length = 16, unique = true, nullable = false)
+    @Column(length = 200, unique = true, nullable = false)
     private String cardNumber;
 
     @Column(length = 100, nullable = false)
